@@ -1,0 +1,362 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoList</title>
+    <script src="./jquery.min.js"></script>
+    <script src="./jquery-ToDoList.js"></script>
+    <link rel="stylesheet" href="./bootstrap插件/bootstrap-3.4.1-dist/css/bootstrap.min.css">
+
+</head>
+<style>
+    * {
+        margin: 0 0;
+        padding: 0 0;
+        list-style: none;
+    }
+    
+    body {
+        background-color: #cbcecb;
+    }
+    
+    .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+        width: 100%;
+        height: 60px;
+        padding: 0 25%;
+        background-color: #2f322f;
+    }
+    
+    .top h2 {
+        float: left;
+        line-height: 60px;
+        color: whitesmoke;
+    }
+    
+    .top .add {
+        width: 55%;
+        height: 60%;
+        padding: 8px;
+        border-radius: 7px;
+    }
+    
+    .content {
+        padding: 0 25%;
+    }
+    
+    .content h2 {
+        font-weight: 600;
+    }
+    
+    .content span {
+        float: right;
+        width: 2%;
+        height: 2%;
+        font-size: 15px;
+        text-align: center;
+        background-color: #e5e5f8;
+        border-radius: 50%;
+    }
+    
+    #do {
+        float: right;
+        width: 2%;
+        height: 2%;
+        font-size: 15px;
+        text-align: center;
+        background-color: #e5e5f8;
+        border-radius: 50%;
+    }
+    
+    #did {
+        float: right;
+        width: 2%;
+        height: 2%;
+        font-size: 15px;
+        text-align: center;
+        background-color: #e5e5f8;
+        border-radius: 50%;
+    }
+    
+    .ToDoList li {
+        position: relative;
+        height: 30px;
+        padding: 0px 15px;
+        padding-right: 0px;
+        margin: 5px 0px;
+        border-left: #629c98 4px solid;
+        border-radius: 3px;
+        background-color: #fcfffc;
+        line-height: 15px;
+    }
+    
+    .ToDoList li div {
+        float: left;
+        width: 500px;
+        height: 30px;
+        /* background-color: aqua; */
+        align-items: center;
+    }
+    
+    .ToDoList li div input {
+        position: absolute;
+        margin: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .ToDoList li div h4 {
+        position: absolute;
+        margin: 0px;
+        top: 50%;
+        left: 40px;
+        transform: translateY(-50%);
+    }
+    
+    .ToDoList li a {
+        float: right;
+        width: 25px;
+        height: 100%;
+        background-color: red;
+        opacity: 0.8;
+        border-radius: 3px;
+    }
+    
+    .ToDoList li span {
+        float: right;
+        cursor: pointer;
+        width: 25px;
+        height: 100%;
+        background-color: rgb(121 100 130 / 82%);
+        margin: 0px 5px;
+        opacity: 0.8;
+        border-radius: 3px;
+    }
+    
+    .ToDoList li span:hover {
+        background-color: rgb(107, 81, 119);
+    }
+    
+    .ToDoList li input {
+        width: 15px;
+        height: 15px;
+        margin: 0px;
+    }
+    
+    .ToDoList li h4 {
+        display: inline-block;
+        margin: 5px 15px;
+        font: 550 normal 15px sonti;
+    }
+    
+    .Done li {
+        position: relative;
+        height: 30px;
+        padding: 0px 15px;
+        padding-right: 0px;
+        margin: 5px 0px;
+        border-left: #629c98 4px solid;
+        border-radius: 3px;
+        background-color: #b9b9b9;
+        line-height: 15px;
+    }
+    
+    .Done li div {
+        float: left;
+        width: 500px;
+        height: 30px;
+        /* background-color: aqua; */
+        align-items: center;
+    }
+    
+    .Done li div input {
+        position: absolute;
+        margin: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .Done li div h4 {
+        position: absolute;
+        margin: 0px;
+        top: 50%;
+        left: 40px;
+        transform: translateY(-50%);
+    }
+    
+    .Done li a {
+        float: right;
+        width: 25px;
+        height: 100%;
+        background-color: red;
+        opacity: 0.8;
+        border-radius: 3px;
+    }
+    
+    .Done li span {
+        float: right;
+        cursor: pointer;
+        width: 25px;
+        height: 100%;
+        background-color: rgb(121 100 130 / 82%);
+        margin: 0px 5px;
+        opacity: 0.8;
+        border-radius: 3px;
+        transition: all 0.5s linear;
+    }
+    
+    .Done li span:hover {
+        background-color: rgb(86, 79, 89);
+    }
+    
+    .Done li input {
+        width: 15px;
+        height: 15px;
+        margin: 0px;
+    }
+    
+    .Done li h4 {
+        display: inline-block;
+        margin: 5px 15px;
+        font: 550 normal 15px sonti;
+    }
+</style>
+<style>
+    @keyframes run {
+        0% {
+            transform: rotate(0deg) rotateX(0deg);
+        }
+        100% {
+            transform: rotate(360deg) rotateX(360deg);
+        }
+    }
+    
+    .cube {
+        position: absolute;
+        top: 15px;
+        left: 100px;
+        width: 30px;
+        height: 30px;
+        /* margin: 150px auto; */
+        /* border: 3px solid black; */
+        animation-name: run;
+        animation-duration: 10s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        transform-style: preserve-3d;
+        animation-play-state: running;
+        /* transform-origin: top; */
+        transition: all 5s ease;
+    }
+    
+    .cube>div {
+        position: absolute;
+        box-sizing: border-box;
+        width: 30px;
+        height: 30px;
+        border: black 2px solid;
+        /* background-color: rosybrown; */
+        background-color: #fff;
+        font-size: 5px;
+        text-align: center;
+        line-height: 25px;
+    }
+    
+    .front {
+        transform: translateZ(15px);
+    }
+    
+    .back {
+        transform: rotateY(180deg) translateZ(15px);
+    }
+    
+    .left {
+        transform: rotateY(90deg) translateZ(15px);
+    }
+    
+    .right {
+        transform: rotateY(-90deg) translateZ(15px);
+    }
+    
+    .top_1 {
+        transform: rotateX(-90deg) translateZ(15px);
+    }
+    
+    .buttom {
+        transform: rotateX(90deg) translateZ(15px);
+    }
+    /* .cube:hover {
+        transform: rotate(360deg) rotateX(360deg);
+    } */
+</style>
+
+<body>
+    <div class="top">
+        <h2>ToDoList</h2>
+        <input type="text" class="add" placeholder="添加ToDo" required>
+
+    </div>
+
+    </div>
+    <div class="content">
+        <div class="doing">
+            <h2>正在进行
+                <div id="do"></div>
+            </h2>
+            <ul class="ToDoList">
+                <li>
+                    <div>
+                        <input type="checkbox">
+                        <h4>第一个todo</h4>
+                    </div>
+                    <a href=""></a>
+                    <span></span>
+                </li>
+            </ul>
+        </div>
+        <div class="Done">
+            <h2>已经完成
+                <div id="did"></div>
+            </h2>
+            <ul class="DidList">
+                <li>
+                    <div>
+                        <input type="checkbox">
+                        <h4>第一个todo</h4>
+                    </div>
+                    <a href=""></a>
+                    <span></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 魔方 -->
+    <div class="cube">
+        <div class="front">加油</div>
+        <div class="back">努力</div>
+        <div class="left">奋斗</div>
+        <div class="right">勤劳</div>
+        <div class="top_1">勇敢</div>
+        <div class="buttom">开心</div>
+    </div>
+    <script>
+        $('.cube').on({
+            click: function() {
+                $(this).stop().css('animation-play-state', 'running');
+            },
+            mouseenter: function() {
+                $(this).stop().css('animation-play-state', 'paused');
+            }
+        })
+
+        // 弹框
+    </script>
+</body>
+
+</html>
